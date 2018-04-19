@@ -38,10 +38,10 @@ public class DisplayWindow extends Application
         Texte.setFill(Color.RED);
         root.getChildren().add(Texte);
 
-        Image image = new Image("https://avatars2.githubusercontent.com/u/37442663?s=400&v=4",500,500,true,true);
+        Image image = new Image(myImg,500,500,true,true);
         ImageView selectedImage = new ImageView();
-        selectedImage.setX(250);
-        selectedImage.setY(200);
+        selectedImage.setX(150);
+        selectedImage.setY(50);
         selectedImage.setImage(image);
         root.getChildren().add(selectedImage);
         stage.show();
