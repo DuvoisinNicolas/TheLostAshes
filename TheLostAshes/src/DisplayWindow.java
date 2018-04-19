@@ -1,48 +1,51 @@
 import javafx.application.Application;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.Group;
+import javafx.scene.text.Text;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class DisplayWindow extends Application
 {
+    static String myText = new String();
+    static String myImg = new String();
+
     public static void main(String[] args)
     {
+        setParams("Super ça marche","https://avatars2.githubusercontent.com/u/37442663?s=400&v=4");
         Application.launch(args);
+    }
+
+    public static void setParams(String _myText,String _myImg)
+    {
+        myText=_myText;
+        myImg=_myImg;
     }
 
     @Override
     public void start(Stage stage)
     {
-        // Create the Text Nodes
-
-        Text bottomText = new Text("Bottom");
-
-
-        BorderPane.setAlignment(bottomText,Pos.BOTTOM_CENTER);
-
-
-        // Create a BorderPane with a Text node in each of the five regions
-        BorderPane root = new BorderPane();
-        root.setBottom(bottomText);
-        // Set the Size of the VBox
-        root.setPrefSize(400, 400);
-        // Set the Style-properties of the BorderPane
-        root.setStyle("-fx-padding: 10;" +
-                "-fx-border-style: solid inside;" +
-                "-fx-border-width: 2;" +
-                "-fx-border-insets: 5;" +
-                "-fx-border-radius: 5;" +
-                "-fx-border-color: blue;");
-
-        // Create the Scene
-        Scene scene = new Scene(root);
-        // Add the scene to the Stage
+        Group root = new Group();
+        Scene scene = new Scene(root, 800, 600, Color.YELLOW);
         stage.setScene(scene);
-        // Set the title of the Stage
-        stage.setTitle("A simple BorderPane Example");
-        // Display the Stage
+
+        Text Texte = new Text();
+        Texte.setText(myText);
+        Texte.setX(300);
+        Texte.setY(200);
+        Texte.setFill(Color.RED);
+        root.getChildren().add(Texte);
+
+        Image image = new Image("https://avatars2.githubusercontent.com/u/37442663?s=400&v=4",500,500,true,true);
+        ImageView selectedImage = new ImageView();
+        selectedImage.setX(250);
+        selectedImage.setY(200);
+        selectedImage.setImage(image);
+        root.getChildren().add(selectedImage);
         stage.show();
     }
+
+
 }
