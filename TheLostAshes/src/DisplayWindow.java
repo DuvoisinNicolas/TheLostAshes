@@ -7,19 +7,31 @@ import javafx.scene.text.Text;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 import static java.lang.String.valueOf;
 
 public class DisplayWindow extends Application
 {
-    private static String myText , myImg = new String();
-    private Character myHero;
+
+    static private String myText,myImg;
+    private Character myHero = new Character();
 
 
-    public static void main(String[] args)
-    {
-        setParams("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris euismod purus ut urna ultrices tristique. Donec euismod mattis pulvinar. Nulla volutpat rutrum purus, ac porttitor neque ","https://avatars2.githubusercontent.com/u/37442663?s=400&v=4");
-        setText(myText);
-        Application.launch(args);
+    public static void main(String[] args) throws InterruptedException {
+        try {
+            Map M = new Map("Bonjour","AuRevoir");
+            System.out.println(M.getMyTexte());
+            setParams(M.getMyTexte(),"https://avatars2.githubusercontent.com/u/37442663?s=400&v=4");
+            Application.launch(args);
+            TimeUnit.SECONDS.sleep(1);
+        }
+        catch (IOException E)
+        {
+            System.out.println(E);
+        }
+
     }
 
     public static String setText (String texte)
@@ -69,7 +81,7 @@ public class DisplayWindow extends Application
         texte.setFill(Color.RED);
         root.getChildren().add(texte);
 
-        Text stats = new Text(20,50,"Nom: "+ myHero.getMyName() +"\n \nAttaque : \n \nDéfense : \n \nHP :");
+        Text stats = new Text(20,50,"Nom: "+ myHero.getMyName() +"\n \n \nAttaque : " + myHero.getMyAtk() + "\n \nDéfense : " + myHero.getMyDef() + "\n \nHP : " + myHero.getMyHp());
         stats.setFill(Color.RED);
         root.getChildren().add(stats);
 
@@ -101,9 +113,10 @@ public class DisplayWindow extends Application
         selectedImage.setX(200);
         selectedImage.setY(10);
         selectedImage.setImage(image);
-        root.getChildren().add(selectedImage);
 
+        root.getChildren().add(selectedImage);
         stage.show();
+
     }
 
 
